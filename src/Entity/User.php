@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
@@ -19,6 +20,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Assert\NotBlank]
+    #[Assert\Email(message:'Vous devez saisir une adresse mail valide')]
     private ?string $email = null;
 
     /**
@@ -33,14 +36,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $first_name = null;
 
+    #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $last_name = null;
 
+    #[Assert\IsTrue(message:'Vous devez accepter les CGU')]
     #[ORM\Column]
-    private ?bool $is_api_enabled = null;
+    private ?bool $is_cgu_enabled = null;
 
     /**
      * @var Collection<int, Order>
@@ -150,14 +156,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isApiEnabled(): ?bool
+    public function isCguEnabled(): ?bool
     {
-        return $this->is_api_enabled;
+        return $this->is_cgu_enabled;
     }
 
-    public function setIsApiEnabled(bool $is_api_enabled): static
+    public function setIsCguEnabled(bool $is_cgu_enabled): static
     {
-        $this->is_api_enabled = $is_api_enabled;
+        $this->is_cgu_enabled = $is_cgu_enabled;
 
         return $this;
     }

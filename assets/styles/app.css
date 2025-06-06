@@ -3,26 +3,38 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  /* max-width: 1440px; */
 }
+
 
 /* === TYPOGRAPHIE === */
 body {
+  margin: 0;
+  padding: 0;
   font-family: 'Inter', sans-serif;
-  background-color: pink;
+background-color: #FFFDF7;
   color: #333;
-  line-height: 1.6;
-  padding-bottom: 3em;
   font-size: 1em;
+  min-height: 100vh;
+  max-width: 1440px;
+  width: 100%;
 }
+
+main {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 
 /* === HEADER / NAV === */
 header {
-  background-color: #ffffff;
-  padding: 1em 2em;
+  background-color: #F6F5F0;
+  padding: 1em 3em;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 }
 
 nav {
@@ -67,6 +79,112 @@ nav a:hover {
   font-size: 1.2em;
 }
 
+
+/* === REGISTER / LOGIN === */
+.containerBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+
+}
+
+.leftBlock {
+  width: 50%;
+}
+
+.leftBlock img{
+width: 100%;
+max-width: 734px;
+height: auto;
+object-fit: cover;
+
+}
+
+.rightBlock {
+width: 42.2%;
+padding: 4em 5em 5em 0;
+color: #666;
+
+
+}
+
+.rightBlock h1 {
+  padding-bottom: 0.5em;
+  font-size: 1.25em;
+}
+
+.rightBlock a {
+  
+  color: #666;
+  text-align: center;
+  width: 100%;
+}
+
+.accountLink {
+  text-align: center;
+      max-width: 479px;
+}
+
+.formInput div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 0.875em;
+
+}
+
+.formInput input {
+    height: 67px;
+    max-width: 479px;
+    margin-bottom: 3em;
+    border: #666 1px solid;
+    padding-left: 1em;
+    
+}
+
+.formInput input:focus-visible {
+    height: 67px;
+    margin-bottom: 3em;
+    border: none;
+    outline: #666 1px solid;
+    
+}
+
+
+.formCheckbox div {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  
+
+}
+
+#register_type_form_is_cgu_enabled {
+  width: 19px;
+    margin-right: 0.5em;
+}
+
+.submit {
+    height: 67px;
+    width: 100%;
+    margin-top: 2em;
+    background-color: #565656;
+    color: white;
+    max-width: 479px;
+
+}
+
+
+.formInput label {
+  padding-bottom: 0.5em;
+  
+}
+form {
+padding-top: 2em;
+padding-bottom: 2em;
+}
+
 /* === PRODUITS === */
 .products {
   display: flex;
@@ -108,10 +226,12 @@ nav a:hover {
 /* === FOOTER === */
 footer {
   text-align: right;
-  margin-top: 3em;
-  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 81px;
   padding-right: 5em;
   font-size: 0.875em;
-  background: #fff;
+ background-color: #F6F5F0;
   color: #999;
 }
