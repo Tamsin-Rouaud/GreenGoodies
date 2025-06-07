@@ -25,12 +25,12 @@ final class RegisterController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $plainPassword = $form->get('plainPassword')->getData();
-            $confirmPassword = $form->get('confirmPassword')->getData();
+            $plainPassword = $form->get('plain_password')->getData();
+            $confirmPassword = $form->get('confirm_password')->getData();
 
             // Vérification des mots de passe identiques
             if ($plainPassword !== $confirmPassword) {
-                $form->get('confirmPassword')->addError(new FormError('Les mots de passe ne correspondent pas.'));
+                $form->get('confirm_password')->addError(new FormError('Les mots de passe ne correspondent pas.'));
             } else {
                 // Vérifie que l'email n’est pas déjà utilisé
                 $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $user->getEmail()]);

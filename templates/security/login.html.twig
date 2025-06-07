@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion - GreenGoodies{% endblock %}
+
+{% block body %}
+<div class="containerBlock">
+    <section class="leftBlock">
+        <img src="images/Login.png" alt="fleurs">
+    </section>
+
+    <section class="rightBlock">
+    <h1 class="rightBlock">Connexion</h1>
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+           
+            
+
+            <div class="formInput">  
+                <label for="inputEmail">Adresse email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+            </div>
+            <div class="formInput">  
+                <label for="inputPassword">Mot de passe</label>
+                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+            </div>
+            <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
+
+            <button class="submit" type="submit">
+                Se connecter
+            </button>
+    </form>
+    <p class="accountLink" >
+                <a href="{{path('app_login')}}">Pas encore de compte ? S'inscrire</a>
+            </p>
+</section>
+</div>
+{% endblock %}

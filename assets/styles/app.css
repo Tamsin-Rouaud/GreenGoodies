@@ -1,47 +1,40 @@
-/* === RESET === */
+/* === RESET ET GENERAL === */
 * {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  /* max-width: 1440px; */
+
 }
 
-
-/* === TYPOGRAPHIE === */
 body {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   font-family: 'Inter', sans-serif;
-background-color: #FFFDF7;
+  background-color: #FFFDF7;
   color: #333;
   font-size: 1em;
   min-height: 100vh;
-  max-width: 1440px;
   width: 100%;
 }
-
-main {
-  max-width: 1440px;
-  width: 100%;
-  margin: 0 auto;
-}
-
 
 /* === HEADER / NAV === */
 header {
-  background-color: #F6F5F0;
-  padding: 1em 3em;
+  background-color: #FFFDF7;
+  padding: 1em 3em 1em 4em;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 
 }
 
 nav {
-    width: 100%;
+    
     display: flex;
     justify-content: space-between;
-    padding: 1em 2em;
+    padding: 1em ;
+    max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
     
 }
 
@@ -63,29 +56,38 @@ nav a:hover {
   text-decoration: underline;
 }
 
-/* === HERO === */
-.hero {
-  background: linear-gradient(to right, #e6f4ea, #ffffff);
-  padding: 4em 2em;
-  text-align: center;
+/* === MAIN === */
+
+main {
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1em;
+/* === FOOTER === */
+footer {
+ background-color: #FFF;
 }
 
-.hero p {
-  font-size: 1.2em;
+footer p {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 81px;
+  padding-right: 5em;
+  font-size: 0.875em;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
+/****************************************************************/
 
 /* === REGISTER / LOGIN === */
+
 .containerBlock {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
 
 }
 
@@ -106,11 +108,11 @@ width: 42.2%;
 padding: 4em 5em 5em 0;
 color: #666;
 
-
 }
 
 .rightBlock h1 {
   padding-bottom: 0.5em;
+  padding-top: 0;
   font-size: 1.25em;
 }
 
@@ -124,6 +126,29 @@ color: #666;
 .accountLink {
   text-align: center;
       max-width: 479px;
+}
+
+
+        
+form {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  
+
+}
+
+.formInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-size: 0.875em;
+
+}
+
+.formCheckbox div {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
 }
 
 .formInput div {
@@ -151,15 +176,6 @@ color: #666;
     
 }
 
-
-.formCheckbox div {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-  
-
-}
-
 #register_type_form_is_cgu_enabled {
   width: 19px;
     margin-right: 0.5em;
@@ -175,18 +191,78 @@ color: #666;
 
 }
 
-
 .formInput label {
   padding-bottom: 0.5em;
   
 }
-form {
-padding-top: 2em;
-padding-bottom: 2em;
+
+/* === PRODUCTPAGE === */
+
+.leftProductBlock {
+  width: 50%;
 }
 
+.leftProductBlock img{
+width: 100%;
+max-width: 734px;
+height: auto;
+object-fit: cover;
+
+}
+
+.rightProductBlock {
+width: 42.2%;
+/* padding: 0em 5em 0em 0; */
+color: #666;
+display: flex;
+justify-content: flex-end;
+flex-direction: column;
+max-width: 465px;
+
+}
+
+#titleProduct {
+  font-weight: 500;
+  font-size: 1.25em;
+  padding-bottom: 2em;
+  /* padding-top: 1em; */
+
+}
+
+#priceTag {
+  font-weight: 300;
+  font-size: 1.875em;
+  padding-bottom: 2.5em;
+}
+
+.blockTextDescription {
+  padding-bottom:8em;
+}
+
+.descriptionText  {
+  padding-top: 1em;
+  font-size: 0.875em;
+}
+/* === HERO === */
+.hero {
+  background: linear-gradient(to right, #e6f4ea, #ffffff);
+  padding: 4em 2em;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1em;
+}
+
+.hero p {
+  font-size: 1.2em;
+}
+
+
+
 /* === PRODUITS === */
-.products {
+/* .products {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -221,17 +297,5 @@ padding-bottom: 2em;
 .product-card p {
   font-size: 0.9em;
   color: #666;
-}
+} */
 
-/* === FOOTER === */
-footer {
-  text-align: right;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  height: 81px;
-  padding-right: 5em;
-  font-size: 0.875em;
- background-color: #F6F5F0;
-  color: #999;
-}
