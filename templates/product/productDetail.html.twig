@@ -1,0 +1,26 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }} - GreenGoodies{% endblock %}
+
+{% block body %}
+<div class="containerBlock">
+    <section class="leftProductBlock">
+        <img src="{{ asset('uploads/products/' ~ product.picture) }}" alt="{{ product.name }}">
+    </section>
+
+    <section class="rightProductBlock">
+        <h1 id="titleProduct">{{ product.name }}</h1>
+        <p id="priceTag">{{ product.price }} €</p>
+        <p id="descriptionTitle">Description</p>
+
+        <div class="blockTextDescription">
+            <p class="descriptionText">{{ product.fullDescription }}</p>
+        </div>
+
+        <div class="submitProduct">
+            <button class="submit" type="submit">Ajouter au panier</button>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,8 +1,62 @@
+{# templates/home/index.html.twig #}
 {% extends 'base.html.twig' %}
 
 {% block title %}Accueil - GreenGoodies{% endblock %}
 
 {% block body %}
-    <h1>Bienvenue sur GreenGoodies !</h1>
-    <p>Je suis la "Page d'accueil avec la liste des produits"</p>
+    <section class="hero">
+        <div class="leftHeroBlock">
+            <div class="textHero">
+                <h1>Bienvenue</h1>
+                <p>Découvrez notre univers de produits durables et éthiques pour une consommation responsable.</p>
+                <p>Retrouvez des articles d'hygiène & beauté, des accessoires & boissons et du prêt à porter</p>
+            </div>
+        </div>
+        <div class="rightHeroBlock">
+            <img src="images/hero.png" alt="Image d'accueil'">
+        </div>
+    </section>
+
+    <section class="homeProducts">
+        <h2>NOS PRODUITS</h2>
+        <div class="productGrid">
+            {% for product in products %}
+                <div class="productCard home">
+                    <div class="imgProduct">
+                        <img src="{{ asset('uploads/products/' ~ product.picture) }}" alt="{{ product.name }}">
+                    </div>
+                    <div class="textProduct">
+                        <h3>{{ product.name }}</h3>
+                        <p class="shortDescription">{{product.shortDescription}}</p>
+                        <p class="price">{{ product.price }} €</p>
+                        <a class="linkProduct" href="{{path('app_product', {'id': product.id})}}">Voir le produit</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+    </section>
+    <section class="banner">
+        <div class="bannerBlock">
+            
+            <div class="textBannerBlock">
+                <h2>NOTRE CONVICTION</h2>
+                <p>Chez GreenGoodies, nous croyons en un monde où le commerce peut être synonyme de bien-être pour la planète et ses habitants. Notre misssion est de vous proposer une sélection rigoureuse de produits qui allient qualité, durabilité et éthique.</p>
+            </div>
+            
+            <img src="images/Login.png" alt="Bannières fleurs">
+
+        </div>
+
+        <div class="bannerBlock">
+            
+            <img src="images/plasticBag.png" alt="Bannières poubelles">
+            
+            <div class="textBannerBlock">
+                <h2>NOS VALEURS</h2>
+                <p>Chez GreenGoodies, nous croyons en un monde où le commerce peut être synonyme de bien-être pour la planète et ses habitants. Notre misssion est de vous proposer une sélection rigoureuse de produits qui allient qualité, durabilité et éthique.</p>
+            </div>
+            
+        </div>
+    </section>
 {% endblock %}

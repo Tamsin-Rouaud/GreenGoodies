@@ -245,57 +245,115 @@ max-width: 465px;
 }
 /* === HERO === */
 .hero {
-  background: linear-gradient(to right, #e6f4ea, #ffffff);
-  padding: 4em 2em;
-  text-align: center;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ width: 100%;
 }
 
-.hero h1 {
-  font-size: 2.5rem;
+.leftHeroBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  height: 751px;
+  background-color: #e8f0e3;
+  
+}
+
+.textHero {
+  width: 40%;
+  font-size: 1.125em;
+}
+.textHero h1 {
+  font-size: 4em;
   margin-bottom: 1em;
 }
 
-.hero p {
-  font-size: 1.2em;
+.textHero p {
+  margin-bottom: 1em;
+  font-weight: 300;
 }
 
 
 
 /* === PRODUITS === */
-/* .products {
+.productGrid {
   display: flex;
   flex-wrap: wrap;
+}
+
+.textProduct {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 2em;
-  margin: 2em;
+  align-items: center;
 }
 
-.product-card {
-  background: white;
-  border-radius: 8px;
-  padding: 1em;
-  max-width: 250px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+.textProduct h3 {
+  font-size: 1em;
+  font-weight: 600;
+  color: #000;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
-.product-card:hover {
-  transform: scale(1.02);
-}
-
-.product-card img {
-  width: 100%;
-  height: auto;
-  border-radius: 4px;
-}
-
-.product-card h2 {
-  font-size: 1.1em;
-  margin-top: 0.5rem;
-}
-
-.product-card p {
-  font-size: 0.9em;
+.textProduct p {
+  font-size: 0.875em;
+  font-weight: 400;
   color: #666;
-} */
+  padding-bottom: 1em;
+}
+
+.linkProduct {
+  padding-top: 1em;
+  padding-bottom: 1.5em;
+  text-decoration: none;
+  color: #000;
+
+}
+
+.productCard img {
+  max-width: 480px;
+}
+
+.homeProducts h2 {
+  padding: 1em;
+  font-size: 0.875em;
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+}
+
+.bannerBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.bannerBlock:first-child {
+  background-color: #EBE3D3;
+ 
+}
+
+.bannerBlock:last-child {
+  background-color: #E8F0E3;
+ 
+}
+
+.textBannerBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 30%;
+  padding: 3em;
+}
+
+.banner img {
+  width: 33%;
+}
+
 

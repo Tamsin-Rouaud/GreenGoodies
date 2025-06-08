@@ -1,0 +1,21 @@
+{# templates/product/productList.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos produits - GreenGoodies{% endblock %}
+
+{% block body %}
+<section class="product-list">
+    <h1>Nos produits</h1>
+    <div class="product-grid">
+        {% for product in products %}
+            <div class="product-card">
+                <img src="{{ asset('uploads/products/' ~ product.picture) }}" alt="{{ product.name }}">
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.shortDescription }}</p>
+                <p class="price">{{ product.price }} €</p>
+                <a class="btn" href="{{ path('app_product', { id: product.id }) }}">Voir le produit</a>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
