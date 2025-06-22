@@ -1,8 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - GreenGoodies{% endblock %}
+{% block title %}Mon panier - GreenGoodies{% endblock %}
 
 {% block body %}
-    <h1>Bienvenue sur GreenGoodies !</h1>
-    <p>Je suis la page "Mon compte"</p>
+
+<div class="blockAccount">
+
+    <h1>Mon compte</h1>
+
+    <section class="myAccount">
+
+        <h2>Mes commandes</h2>
+
+        {% if orders is not empty %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Date</th>
+                        <th>Prix</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                        <tr>
+                            <td>{{ order.id }}</td>
+                            <td>{{ order.createdAt|date('d/m/Y') }}</td>
+                            <td>{{ order.totalPrice }} €</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Vous n'avez encore passé aucune commande.</p>
+        {% endif %}
+    </section>
+    <section class="apiAccess">
+        <h2>Mon accès API</h2>
+        <button class="submitAccount submit" type="submit">Activer mon accès API</button>
+    </section>
+    <section class="deleteAccount">
+        <button class="submitAccount submit" type="submit">Supprimer mon compte</button>
+    </section>
+</div>
 {% endblock %}

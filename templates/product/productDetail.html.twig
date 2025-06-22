@@ -1,4 +1,3 @@
-
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ product.name }} - GreenGoodies{% endblock %}
@@ -19,7 +18,20 @@
         </div>
 
         <div class="submitProduct">
-            <button class="submit" type="submit">Ajouter au panier</button>
+            {% if not app.user %}
+                <a class="btn" href="{{ path('app_login') }}">Se connecter pour ajouter au panier</a>
+            {% else %}
+                <form method="post" action="{{ path('add_to_cart', { id: product.id }) }}">
+    <label for="quantity">Quantité</label>
+    <input type="number" name="quantity" id="quantity"
+           value="{{ cartItem ? cartItem.quantity : 0 }}"
+           min="0" required>
+    <button class="submit" type="submit">
+        {{ cartItem ? 'Mettre à jour' : 'Ajouter au panier' }}
+    </button>
+</form>
+
+            {% endif %}
         </div>
     </section>
 </div>

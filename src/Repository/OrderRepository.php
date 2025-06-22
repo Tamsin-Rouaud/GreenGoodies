@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Order;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -15,29 +16,38 @@ class OrderRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Order::class);
     }
+// src/Repository/OrderRepository.php
+public function findByUser(User $user): array
+{
+    return $this->createQueryBuilder('o')
+        ->andWhere('o.user = :user')
+        ->setParameter('user', $user)
+        ->orderBy('o.created_at', 'DESC')
+        ->getQuery()
+        ->getResult();
+}
 
-    //    /**
-    //     * @return Order[] Returns an array of Order objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('o')
-    //            ->andWhere('o.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('o.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+public function findValidatedByUser(User $user): array
+{
+    return $this->createQueryBuilder('o')
+        ->andWhere('o.user = :user')
+        ->andWhere('o.isValidated = true')
+        ->setParameter('user', $user)
+        ->orderBy('o.created_at', 'DESC')
+        ->getQuery()
+        ->getResult();
+}
 
-    //    public function findOneBySomeField($value): ?Order
-    //    {
-    //        return $this->createQueryBuilder('o')
-    //            ->andWhere('o.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+public function findValidatedOrdersByUser(User $user): array
+{
+    return $this->createQueryBuilder('o')
+        ->andWhere('o.user = :user')
+        ->andWhere('o.isValidated = true')
+        ->setParameter('user', $user)
+        ->orderBy('o.created_at', 'DESC')
+        ->getQuery()
+        ->getResult();
+}
+
+
 }

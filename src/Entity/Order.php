@@ -19,6 +19,10 @@ class Order
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
+    
+#[ORM\Column(type: 'boolean')]
+private bool $isValidated = false;
+
     #[ORM\ManyToOne(inversedBy: 'orders')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
@@ -87,7 +91,7 @@ class Order
     public function removeOrderItem(OrderItem $orderItem): static
     {
         if ($this->orderItems->removeElement($orderItem)) {
-            // set the owning side to null (unless already changed)
+            
             if ($orderItem->getOrder() === $this) {
                 $orderItem->setOrder(null);
             }
@@ -107,4 +111,29 @@ class Order
 
         return $this;
     }
+
+    public function updateTotalPrice(): void
+{
+    $total = 0;
+
+    foreach ($this->orderItems as $item) {
+        $total += $item->getQuantity() * $item->getUnitPrice();
+    }
+
+    $this->total_price = $total;
+}
+
+
+public function isValidated(): bool
+{
+    return $this->isValidated;
+}
+
+public function setIsValidated(bool $isValidated): static
+{
+    $this->isValidated = $isValidated;
+    return $this;
+}
+
+
 }

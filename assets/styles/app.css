@@ -187,8 +187,7 @@ form {
     margin-top: 2em;
     background-color: #565656;
     color: white;
-    max-width: 479px;
-
+   
 }
 
 .formInput label {
@@ -196,91 +195,45 @@ form {
   
 }
 
-/* === PRODUCTPAGE === */
+/* === HOME === */
 
-.leftProductBlock {
-  width: 50%;
-}
-
-.leftProductBlock img{
-width: 100%;
-max-width: 734px;
-height: auto;
-object-fit: cover;
-
-}
-
-.rightProductBlock {
-width: 42.2%;
-/* padding: 0em 5em 0em 0; */
-color: #666;
-display: flex;
-justify-content: flex-end;
-flex-direction: column;
-max-width: 465px;
-
-}
-
-#titleProduct {
-  font-weight: 500;
-  font-size: 1.25em;
-  padding-bottom: 2em;
-  /* padding-top: 1em; */
-
-}
-
-#priceTag {
-  font-weight: 300;
-  font-size: 1.875em;
-  padding-bottom: 2.5em;
-}
-
-.blockTextDescription {
-  padding-bottom:8em;
-}
-
-.descriptionText  {
-  padding-top: 1em;
-  font-size: 0.875em;
-}
-/* === HERO === */
-.hero {
- display: flex;
- justify-content: center;
- align-items: center;
- width: 100%;
-}
-
-.leftHeroBlock {
+  /**** === HERO === ****/
+  .hero {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  width: 50%;
-  height: 751px;
-  background-color: #e8f0e3;
-  
-}
+  width: 100%;
+  }
 
-.textHero {
-  width: 40%;
-  font-size: 1.125em;
-}
-.textHero h1 {
-  font-size: 4em;
-  margin-bottom: 1em;
-}
+  .leftHeroBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    height: 751px;
+    background-color: #e8f0e3;
+    
+  }
 
-.textHero p {
-  margin-bottom: 1em;
-  font-weight: 300;
-}
+  .textHero {
+    width: 40%;
+    font-size: 1.125em;
+  }
+  .textHero h1 {
+    font-size: 4em;
+    margin-bottom: 1em;
+  }
 
-
+  .textHero p {
+    margin-bottom: 1em;
+    font-weight: 300;
+  }
 
 /* === PRODUITS === */
 .productGrid {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -348,8 +301,19 @@ max-width: 465px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  width: 30%;
+  width: 36%;
   padding: 3em;
+  font-size: 0.875em;
+ 
+}
+
+.textBannerBlock h2 {
+  font-size: 1.25em;
+  font-weight: 500;
+}
+
+.textBannerBlock p {
+   padding-top: 1em;
 }
 
 .banner img {
@@ -357,3 +321,258 @@ max-width: 465px;
 }
 
 
+/* === PAGEDETAILPRODUIT === */
+
+.leftProductBlock {
+  width: 50%;
+}
+
+.leftProductBlock img{
+width: 100%;
+object-fit: cover;
+
+}
+
+.rightProductBlock {
+width: 42.2%;
+color: #666;
+display: flex;
+justify-content: flex-end;
+flex-direction: column;
+
+}
+
+#titleProduct {
+  font-weight: 500;
+  font-size: 1.25em;
+  padding-bottom: 2em;
+  
+}
+
+#priceTag {
+  font-weight: 300;
+  font-size: 1.875em;
+  padding-bottom: 2.5em;
+}
+
+.blockTextDescription {
+  padding-bottom:8em;
+}
+
+.descriptionText  {
+  padding-top: 1em;
+  font-size: 0.875em;
+}
+
+/* === MON PANIER === */
+.cartTitle h1 {
+  text-align: center;
+  padding-bottom: 1em;
+  font-size: 1.25em;
+  font-weight: 500;
+}
+
+.cartContainer, .blockAccount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #F7F1EC;
+  padding-top: 6em;
+  padding-bottom: 6em;
+  
+}
+.cartBlock {
+  width:604px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+ 
+  
+}
+
+.cartItem {
+display: flex;
+padding: 2em;
+align-items: center;
+background-color: white;
+height: 220px;
+
+}
+
+
+
+
+
+.cartDetails {
+   width: 75%;
+   padding-left: 2em;
+}
+
+.cartDetails h3 {
+  font-size: 0.875em;
+  font-weight: 600;
+
+}
+.cartDetails p {
+  padding-top: 0.5em;
+}
+
+.cartDetails p:first-of-type {
+  font-size: 0.875em;
+  font-weight: 400;
+  color: #666;
+
+}
+
+.cartDetails p:last-of-type {
+  font-weight: 500;
+  font-size: 1.125em;
+}
+
+.linkEmptyCart {
+
+  padding-bottom: 1em;
+}
+
+.linkEmptyCart a {
+  text-decoration: none;
+  font-size: 0.875em;
+  color: #666;
+
+}
+
+
+.imgCartContainer img {
+  max-width: 140px;
+ }
+
+.cartTotal {
+ background-color: white;
+  justify-content: center;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 0.5em;
+  height: 81px;
+  padding-right: 2em;
+}
+
+.cartTotal p:first-of-type {
+  font-size: 0.875em;
+  font-weight: 500;
+}
+
+.cartTotal p:last-of-type {
+  font-size: 0.750em;
+  color: #666;
+}
+
+.cartTotal span {
+  font-size: 1.25em;
+  font-weight: 400;
+}
+
+#submitCart {
+  width: 75%;
+  height: 67px;
+  font-family: Inter, sans-serif;
+font-size: 0.875em;
+    
+    background-color: #565656;
+    color: white;
+    
+
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/*=== MON COMPTE ===*/
+
+.blockAccount {
+  padding-top: 3em;
+}
+
+.blockAccount h1 {
+    text-align: center;
+    /* margin-top: 1em; */
+    font-size: 1.25em;
+    font-weight: 500;
+}
+
+.blockAccount h2 {
+  font-size: 0.875em;
+  font-weight: 600;
+
+}
+
+/* Conteneur principal de la section compte */
+.myAccount, .apiAccess, .deleteAccount {
+    background-color: #fff;
+    width: 46.4%;
+    
+    margin: 2rem auto;
+    padding: 3em;
+ 
+    
+}
+
+
+/* Tableau des commandes */
+table {
+    width: 100%;
+
+}
+
+thead {
+    background-color: transparent;
+    border-bottom: 2px solid #ccc;
+}
+
+th, td {
+    text-align: left;
+    
+    padding: 0.8rem;
+    padding-left: 0;
+    font-size: 0.875em;
+    border-bottom: 1px solid #ccc;
+}
+
+th {
+    font-weight: 400;
+    color: #666;
+width: 40%;
+}
+
+td {
+  color: #333;
+  font-weight: 500;
+}
+
+
+/* Boutons communs */
+.submitAccount {
+margin-top: 0;
+}
+
+/* Sections API et suppression */
+.apiAccess, .deleteAccount {
+    background-color: #fff;
+    max-width: 700px;
+    margin: 1.5rem auto;
+    padding: 3em;
+
+    text-align: center;
+}
+
+.apiAccess h2 {
+    margin-bottom: 2em;
+    font-size: 0.875em;
+    text-align: left;
+}

@@ -17,7 +17,7 @@
             <a href="{{ path('app_home') }}"><img src="images/Logo.png"></a>
             <ul class="navItems">
                 {% if app.user %}
-                    <li><a href="{{ path('app_home') }}">Nos produits</a></li>
+                    <li><a href="{{ path('app_products') }}">Nos produits</a></li>
                     <li><a href="{{ path('app_cart') }}">Mon panier</a></li>
                     <li><a href="{{ path('app_account') }}">Mon compte</a></li>
                     <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
@@ -44,4 +44,12 @@
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </body>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
 </html>

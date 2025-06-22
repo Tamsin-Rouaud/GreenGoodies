@@ -1,8 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil - GreenGoodies{% endblock %}
+{% block title %}Mon panier - GreenGoodies{% endblock %}
 
 {% block body %}
-    <h1>Bienvenue sur GreenGoodies !</h1>
-    <p>Je suis la page "Mon panier"</p>
+<section class="cartContainer">
+    <div class="cartTitle">
+        <h1>Mon panier</h1>
+    </div>
+
+    {% if order and order.orderItems|length > 0 %}
+    <div class="cartBlock">
+
+        <div class="linkEmptyCart">
+            <a class="emptyBasket" href="{{ path('clear_cart') }}"> X Vider le panier</a>
+        </div>
+
+        {% for item in order.orderItems %}
+        <div class="cartItem">
+            <div class="imgCartContainer">
+                <img src="{{ asset('uploads/products/' ~ item.product.picture) }}" alt="{{ item.product.name }}">
+            </div>
+            <div class="cartDetails">
+                <h3>{{ item.product.name }}</h3>
+                <p>Quantité : {{ item.quantity }}</p>
+                <p>{{ item.unitPrice }} €</p>
+               
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="cartTotal">
+            <p>Total panier : <span>{{ totalPrice }} €</span></p>
+
+            
+            <p>Frais de livraison : Offert</p>
+        </div>
+
+        <form class="buttonContainer" method="post" action="{{ path('confirm_order') }}" onsubmit="this.querySelector('button').disabled = true;">
+    <button id="submitCart" type="submit">Valider la commande</button>
+</form>
+
+    </div>
+    {% else %}
+        <p>Votre panier est vide.</p>
+    {% endif %}
+</section>
 {% endblock %}
