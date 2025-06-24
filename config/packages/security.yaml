@@ -17,10 +17,24 @@ security:
             lazy: true
             provider: app_user_provider
             custom_authenticator: App\Security\AppAuthenticator
+            user_checker: App\Security\ApiUserChecker
+            json_login:
+                check_path: /api/login_check
+                username_path: username
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
             logout:
                 path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
+
+        api:
+            pattern: ^/api
+            stateless: true
+            provider: app_user_provider
+            jwt: ~
+            
+
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -30,16 +44,18 @@ security:
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
+
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
-    access_control:
-    - { path: ^/login, roles: PUBLIC_ACCESS }
-    - { path: ^/register, roles: PUBLIC_ACCESS }
-    - { path: ^/logout, roles: PUBLIC_ACCESS }
-    - { path: ^/, roles: PUBLIC_ACCESS }
-    - { path: ^/product, roles: PUBLIC_ACCESS }
-    - { path: ^/, roles: ROLE_USER }
+        - { path: ^/api/login_check, roles: PUBLIC_ACCESS }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/login, roles: PUBLIC_ACCESS }
+        - { path: ^/register, roles: PUBLIC_ACCESS }
+        - { path: ^/logout, roles: PUBLIC_ACCESS }
+        - { path: ^/product, roles: PUBLIC_ACCESS }
+        
+        - { path: ^/, roles: ROLE_USER }
+
+
 
 
 when@test:

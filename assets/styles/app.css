@@ -210,7 +210,7 @@ form {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 50%;
+   
     height: 751px;
     background-color: #e8f0e3;
     
@@ -362,6 +362,16 @@ flex-direction: column;
 .descriptionText  {
   padding-top: 1em;
   font-size: 0.875em;
+}
+
+#btn {
+  text-decoration: none;
+  color: white;
+}
+
+#btn::after {
+  text-decoration: none;
+  color: white;
 }
 
 /* === MON PANIER === */
@@ -575,4 +585,31 @@ margin-top: 0;
     margin-bottom: 2em;
     font-size: 0.875em;
     text-align: left;
+}
+
+.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 1.2rem 1.5rem;
+    margin: 2rem auto;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+}
+
+.flash-warning {
+    background-color: #fff;
+    color: red;
+    border: 5px solid red;
+    padding: 1rem;
+    margin: 1.5rem auto;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: 600;
+    max-width: 600px;
 }

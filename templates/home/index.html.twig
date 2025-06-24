@@ -7,7 +7,12 @@
     <section class="hero">
         <div class="leftHeroBlock">
             <div class="textHero">
-                <h1>Bienvenue</h1>
+                {% if app.user %}
+    <h1>Bienvenue {{ app.user.firstName }}</h1>
+{% else %}
+    <h1>Bienvenue chez GreenGoodies</h1>
+{% endif %}
+
                 <p>Découvrez notre univers de produits durables et éthiques pour une consommation responsable.</p>
                 <p>Retrouvez des articles d'hygiène & beauté, des accessoires & boissons et du prêt à porter</p>
             </div>

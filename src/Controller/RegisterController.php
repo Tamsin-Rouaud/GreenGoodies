@@ -1,6 +1,9 @@
 <?php
 namespace App\Controller;
 
+use App\Security\AppAuthenticator;
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+
 use App\Entity\User;
 use App\Form\RegisterTypeForm;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,10 +18,13 @@ final class RegisterController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
     public function register(
-        Request $request,
-        UserPasswordHasherInterface $passwordHasher,
-        EntityManagerInterface $entityManager
-    ): Response {
+    Request $request,
+    UserPasswordHasherInterface $passwordHasher,
+    EntityManagerInterface $entityManager,
+    UserAuthenticatorInterface $userAuthenticator,
+    AppAuthenticator $authenticator
+): Response
+ {
         $user = new User();
 
         $form = $this->createForm(RegisterTypeForm::class, $user);
@@ -45,7 +51,12 @@ final class RegisterController extends AbstractController
                     $entityManager->flush();
 
                     // Redirection vers login ou accueil
-                    return $this->redirectToRoute('app_login');
+                    return $userAuthenticator->authenticateUser(
+    $user,
+    $authenticator,
+    $request
+);
+
                 }
             }
         }

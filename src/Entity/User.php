@@ -48,10 +48,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $is_cgu_enabled = null;
 
+        #[ORM\Column(type: 'boolean')]
+private bool $isApiAccessEnabled = false;
+
     /**
      * @var Collection<int, Order>
      */
-    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'user_id')]
+    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'user', orphanRemoval: true)]
+
     private Collection $orders;
 
     public function __construct()
@@ -196,5 +200,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+
+
     }
+
+
+
+
+public function isApiAccessEnabled(): bool
+{
+    return $this->isApiAccessEnabled;
+}
+
+public function setIsApiAccessEnabled(bool $enabled): self
+{
+    $this->isApiAccessEnabled = $enabled;
+    return $this;
+}
+
 }

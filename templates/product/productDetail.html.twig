@@ -10,7 +10,8 @@
 
     <section class="rightProductBlock">
         <h1 id="titleProduct">{{ product.name }}</h1>
-        <p id="priceTag">{{ product.price }} €</p>
+        <p id="priceTag">{{ product.price|euro }}
+</p>
         <p id="descriptionTitle">Description</p>
 
         <div class="blockTextDescription">
@@ -19,7 +20,7 @@
 
         <div class="submitProduct">
             {% if not app.user %}
-                <a class="btn" href="{{ path('app_login') }}">Se connecter pour ajouter au panier</a>
+                <button class="submit" ><a id="btn" href="{{ path('app_login') }}">Se connecter pour ajouter au panier</a></button>
             {% else %}
                 <form method="post" action="{{ path('add_to_cart', { id: product.id }) }}">
     <label for="quantity">Quantité</label>

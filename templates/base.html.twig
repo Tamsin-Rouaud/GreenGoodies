@@ -12,9 +12,17 @@
 </head>
 
 <body>
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }} ">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
     <header>
         <nav>
-            <a href="{{ path('app_home') }}"><img src="images/Logo.png"></a>
+            <a href="{{ path('app_home') }}"><img src="{{ asset('images/logo.png') }}" alt="GreenGoodies">
+</a>
             <ul class="navItems">
                 {% if app.user %}
                     <li><a href="{{ path('app_products') }}">Nos produits</a></li>
@@ -44,12 +52,6 @@
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
 </body>
-{% for label, messages in app.flashes %}
-    {% for message in messages %}
-        <div class="flash-{{ label }}">
-            {{ message }}
-        </div>
-    {% endfor %}
-{% endfor %}
+
 
 </html>

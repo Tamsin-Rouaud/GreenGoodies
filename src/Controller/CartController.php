@@ -41,54 +41,74 @@ final class CartController extends AbstractController
         ]);
     }
 
-    #[Route('/cart/add/{id}', name: 'add_to_cart', methods: ['POST'])]
-    public function addToCart(Product $product, Request $request, EntityManagerInterface $em): Response
-    {
-        $user = $this->getUser();
-        if (!$user) {
-            return $this->redirectToRoute('app_login');
-        }
-
-        $quantity = (int) $request->request->get('quantity');
-
-        $order = $em->getRepository(Order::class)->findOneBy([
-            'user' => $user,
-            'isValidated' => false
-        ]);
-
-        if (!$order) {
-            $order = new Order();
-            $order->setUser($user);
-            $order->setCreatedAt(new \DateTimeImmutable());
-            $order->setTotalPrice(0);
-            $order->setIsValidated(false);
-            $em->persist($order);
-            $em->flush();
-        }
-
-        $orderItem = $em->getRepository(OrderItem::class)->findOneBy([
-            'order' => $order,
-            'product' => $product,
-        ]);
-
-        if ($quantity <= 0 && $orderItem) {
-            $em->remove($orderItem);
-        } elseif ($orderItem) {
-            $orderItem->setQuantity($quantity);
-        } else {
-            $orderItem = new OrderItem();
-            $orderItem->setOrder($order);
-            $orderItem->setProduct($product);
-            $orderItem->setQuantity($quantity);
-            $orderItem->setUnitPrice($product->getPrice());
-            $em->persist($orderItem);
-        }
-
-        $order->updateTotalPrice();
-        $em->flush();
-
-        return $this->redirectToRoute('app_cart');
+   #[Route('/cart/add/{id}', name: 'add_to_cart', methods: ['POST'])]
+public function addToCart(Product $product, Request $request, EntityManagerInterface $em): Response
+{
+    $user = $this->getUser();
+    if (!$user) {
+        return $this->redirectToRoute('app_login');
     }
+
+    $quantity = (int) $request->request->get('quantity');
+
+    $order = $em->getRepository(Order::class)->findOneBy([
+        'user' => $user,
+        'isValidated' => false
+    ]);
+
+    if (!$order) {
+        $order = new Order();
+        $order->setUser($user);
+        $order->setCreatedAt(new \DateTimeImmutable());
+        $order->setTotalPrice(0);
+        $order->setIsValidated(false);
+        $em->persist($order);
+        $em->flush();
+    }
+
+    $orderItem = $em->getRepository(OrderItem::class)->findOneBy([
+        'order' => $order,
+        'product' => $product,
+    ]);
+
+    if ($quantity <= 0) {
+        if ($orderItem) {
+            // L’article est déjà dans le panier → on le supprime
+            $em->remove($orderItem);
+            $this->addFlash('success', 'Produit retiré du panier.');
+            $em->flush();
+
+            // Si c'était le seul article → on supprime aussi la commande
+            if (count($order->getOrderItems()) === 1) {
+                $em->remove($order);
+                $em->flush();
+            }
+
+            return $this->redirectToRoute('app_cart');
+        } else {
+            // Aucun produit à retirer → reste sur la fiche produit
+            $this->addFlash('warning', 'Veuillez choisir une quantité supérieure à 0.');
+            return $this->redirectToRoute('app_product', ['id' => $product->getId()]);
+        }
+    }
+
+    if ($orderItem) {
+        $orderItem->setQuantity($quantity);
+    } else {
+        $orderItem = new OrderItem();
+        $orderItem->setOrder($order);
+        $orderItem->setProduct($product);
+        $orderItem->setQuantity($quantity);
+        $orderItem->setUnitPrice($product->getPrice());
+        $em->persist($orderItem);
+    }
+
+    $order->updateTotalPrice();
+    $em->flush();
+
+    return $this->redirectToRoute('app_cart');
+}
+
 
     #[Route('/cart/clear', name: 'clear_cart')]
     public function clear(EntityManagerInterface $em): Response

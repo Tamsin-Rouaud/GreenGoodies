@@ -19,37 +19,49 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
+    // Nom de la route du formulaire de connexion
     public const LOGIN_ROUTE = 'app_login';
 
     public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
     }
 
+    // Cette méthode est appelée quand l'utilisateur soumet le formulaire de connexion
     public function authenticate(Request $request): Passport
     {
+        // On récupère l'email soumis dans le formulaire
         $email = $request->getPayload()->getString('email');
 
+        // Symfony garde le dernier email saisi pour le réafficher si la connexion échoue
         $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
 
+        // On crée un objet Passport avec :
+        // - l'identité de l'utilisateur (email)
+        // - les identifiants (mot de passe)
+        // - un badge de sécurité pour vérifier le token CSRF
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($request->getPayload()->getString('password')),
             [
-                new CsrfTokenBadge('authenticate', $request->getPayload()->getString('_csrf_token')),            ]
+                new CsrfTokenBadge('authenticate', $request->getPayload()->getString('_csrf_token')),
+            ]
         );
     }
 
+    // Cette méthode est appelée quand la connexion réussit
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        // Si l'utilisateur essayait d'accéder à une page protégée avant de se connecter,
+        // on le redirige vers cette page
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
-        // For example:
+        // Sinon, on le redirige vers la page d’accueil
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
-        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
+    // Cette méthode indique quelle est l’URL du formulaire de connexion
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate('app_login');

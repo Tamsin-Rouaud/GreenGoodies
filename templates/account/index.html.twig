@@ -24,9 +24,10 @@
                 <tbody>
                     {% for order in orders %}
                         <tr>
-                            <td>{{ order.id }}</td>
+                            <td>{{ '%02d'|format(order.id) }}</td>
+
                             <td>{{ order.createdAt|date('d/m/Y') }}</td>
-                            <td>{{ order.totalPrice }} €</td>
+                            <td>{{ order.totalPrice|euro }}</td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -36,11 +37,20 @@
         {% endif %}
     </section>
     <section class="apiAccess">
-        <h2>Mon accès API</h2>
-        <button class="submitAccount submit" type="submit">Activer mon accès API</button>
-    </section>
+    <h2>Mon accès API</h2>
+    <form method="post" action="{{ path('account_toggle_api_access') }}">
+        <input type="hidden" name="_token" value="{{ csrf_token('toggle_api_access') }}">
+        <button class="submitAccount submit" type="submit">
+            {{ app.user.isApiAccessEnabled ? 'Désactiver mon accès API' : 'Activer mon accès API' }}
+        </button>
+    </form>
+</section>
+
     <section class="deleteAccount">
+<form method="post" action="{{ path('account_delete') }}">
+<input type="hidden" name="_token" value="{{ csrf_token('delete_account') }}">
         <button class="submitAccount submit" type="submit">Supprimer mon compte</button>
+</form>
     </section>
 </div>
 {% endblock %}

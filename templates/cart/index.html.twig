@@ -23,14 +23,14 @@
             <div class="cartDetails">
                 <h3>{{ item.product.name }}</h3>
                 <p>Quantité : {{ item.quantity }}</p>
-                <p>{{ item.unitPrice }} €</p>
+                <p>{{ item.unitPrice|euro }}</p>
                
             </div>
         </div>
         {% endfor %}
 
         <div class="cartTotal">
-            <p>Total panier : <span>{{ totalPrice }} €</span></p>
+            <p>Total panier : <span>{{ totalPrice|euro }}</span></p>
 
             
             <p>Frais de livraison : Offert</p>

@@ -15,7 +15,8 @@
                     <div class="textProduct">
                         <h3>{{ product.name }}</h3>
                         <p class="shortDescription">{{product.shortDescription}}</p>
-                        <p class="price">{{ product.price }} €</p>
+                        <p class="price">{{ product.price|euro }}
+</p>
                         <a class="linkProduct" href="{{path('app_product', {'id': product.id})}}">Voir le produit</a>
                     </div>
                 </div>
