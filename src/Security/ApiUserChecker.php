@@ -3,8 +3,9 @@
 namespace App\Security;
 
 use App\Entity\User;
+use App\Exception\CustomApiAccessDeniedException;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAccountStatusException;
+
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 
 // Cette classe permet de vérifier certaines conditions avant qu’un utilisateur puisse se connecter à l’API
@@ -20,8 +21,9 @@ class ApiUserChecker implements UserCheckerInterface
 
         // Si l'accès API n’est pas activé pour l’utilisateur...
         if (!$user->isApiAccessEnabled()) {
-            // ... on empêche la connexion API et on affiche un message d’erreur personnalisé
-            throw new CustomUserMessageAccountStatusException('Accès API non activé. Activez-le dans votre profil.');
+            // on empêche la connexion API et on affiche un message d’erreur personnalisé
+            throw new CustomApiAccessDeniedException();
+
         }
     }
 

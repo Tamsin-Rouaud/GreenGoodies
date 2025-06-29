@@ -14,12 +14,16 @@ final class ApiProductController extends AbstractController
 {
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[Route('/products', name: 'api_products', methods: ['GET'])]
+
+
     public function list(ProductRepository $productRepository, SerializerInterface $serializer): JsonResponse
     {
+
+
         $products = $productRepository->findAll();
 
         $json = $serializer->serialize($products, 'json', ['groups' => ['product:read']]);
-        // dd($this->container->get('security.token_storage')->getToken());
+
 
 
         return new JsonResponse($json, Response::HTTP_OK, [], true);
