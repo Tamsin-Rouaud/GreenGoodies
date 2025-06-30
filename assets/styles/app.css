@@ -613,3 +613,18 @@ margin-top: 0;
     font-weight: 600;
     max-width: 600px;
 }
+.formInput ul {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.formInput ul li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: red;
+  font-weight: normal;
+}
+

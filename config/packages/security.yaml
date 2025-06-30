@@ -55,7 +55,7 @@ security:
         - { path: ^/register, roles: PUBLIC_ACCESS }
         - { path: ^/logout, roles: PUBLIC_ACCESS }
         - { path: ^/product, roles: PUBLIC_ACCESS }
-        - { path: ^/, roles: ROLE_USER }
+        # - { path: ^/$, roles: ROLE_USER }
 
 
 

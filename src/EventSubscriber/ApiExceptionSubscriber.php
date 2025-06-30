@@ -2,14 +2,12 @@
 
 namespace App\EventSubscriber;
 
-
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-use Symfony\Component\Validator\Exception\ValidationFailedException;
 
 class ApiExceptionSubscriber implements EventSubscriberInterface
 {
@@ -17,33 +15,12 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
     {
         $request = $event->getRequest();
 
+        // Ne traite que les routes API
         if (!str_starts_with($request->getPathInfo(), '/api')) {
             return;
         }
 
         $exception = $event->getThrowable();
-
-        // Cas spécial : validation échouée
-        if ($exception instanceof ValidationFailedException) {
-            $errors = [];
-
-            foreach ($exception->getViolations() as $violation) {
-                $errors[] = [
-                    'field' => $violation->getPropertyPath(),
-                    'message' => $violation->getMessage(),
-                ];
-            }
-
-            $response = new JsonResponse([
-                'code' => 400,
-                'error' => 'Validation failed',
-                'violations' => $errors,
-            ], 400);
-
-            $event->setResponse($response);
-            return;
-        }
-
 
         $statusCode = $exception instanceof HttpExceptionInterface
             ? $exception->getStatusCode()

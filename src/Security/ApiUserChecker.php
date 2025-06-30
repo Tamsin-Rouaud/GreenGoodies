@@ -3,33 +3,35 @@
 namespace App\Security;
 
 use App\Entity\User;
-use App\Exception\CustomApiAccessDeniedException;
-use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-// Cette classe permet de vérifier certaines conditions avant qu’un utilisateur puisse se connecter à l’API
 class ApiUserChecker implements UserCheckerInterface
 {
-    // Cette méthode est appelée AVANT l'authentification complète
+
+    public function __construct(private RequestStack $requestStack) {}
+    // AVANT l’authentification : ne rien faire ici
     public function checkPreAuth(UserInterface $user): void
     {
-        // On s'assure que l'objet utilisateur est bien de type App\Entity\User
-        if (!$user instanceof User) {
-            return;
-        }
-
-        // Si l'accès API n’est pas activé pour l’utilisateur...
-        if (!$user->isApiAccessEnabled()) {
-            // on empêche la connexion API et on affiche un message d’erreur personnalisé
-            throw new CustomApiAccessDeniedException();
-
-        }
+        // Vide
     }
 
-    // Cette méthode est appelée APRÈS l'authentification, ici on ne fait rien
+    // APRÈS authentification : blocage si accès API désactivé
     public function checkPostAuth(UserInterface $user): void
-    {
-        // Rien ici pour l'instant
+{
+    if (!$user instanceof User) {
+        return;
     }
+
+    $request = $this->requestStack->getCurrentRequest();
+
+    // On bloque SEULEMENT lors du login API
+    if ($request && $request->getPathInfo() === '/api/login_check') {
+        if (!$user->isApiAccessEnabled()) {
+            throw new CustomUserMessageAuthenticationException('403::Accès API non activé. Activez-le dans votre profil.');
+        }
+    }
+}
 }

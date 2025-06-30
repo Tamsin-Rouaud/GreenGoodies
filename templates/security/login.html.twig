@@ -12,8 +12,11 @@
     <h1 class="rightBlock">Connexion</h1>
         <form method="post">
             {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
+    <div class="alert alert-danger">
+        {{ error.messageKey == 'Invalid credentials.' ? 'Identifiants incorrects.' : error.messageKey|trans(error.messageData, 'security') }}
+    </div>
+{% endif %}
+
 
            
             
@@ -33,7 +36,7 @@
             </button>
     </form>
     <p class="accountLink" >
-                <a href="{{path('app_login')}}">Pas encore de compte ? S'inscrire</a>
+                <a href="{{path('app_register')}}">Pas encore de compte ? S'inscrire</a>
             </p>
 </section>
 </div>

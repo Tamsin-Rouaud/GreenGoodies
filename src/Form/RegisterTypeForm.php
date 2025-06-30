@@ -7,9 +7,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Length;
 
 class RegisterTypeForm extends AbstractType
 {
@@ -19,19 +22,27 @@ class RegisterTypeForm extends AbstractType
             ->add('last_name', TextType::class)
             ->add('first_name', TextType::class)
             ->add('email', EmailType::class)
-            ->add('plain_password', PasswordType::class, [
-    'mapped' => false,
-])
-            ->add('confirm_password', PasswordType::class, ['mapped' => false,
+            ->add('plainPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Les mots de passe ne correspondent pas.',
+                'required' => true,
+                'mapped' => false,
+                'first_options'  => ['label' => 'Mot de passe'],
+                'second_options' => ['label' => 'Confirmation du mot de passe'],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci de saisir un mot de passe.',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères.',
+                    ]),
+                ],
             ])
-            
-            
             ->add('is_cgu_enabled', CheckboxType::class, [
-        'mapped' => true,
-    'required' => true,
-])
-
-        ;
+                'mapped' => true,
+                'required' => true,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
