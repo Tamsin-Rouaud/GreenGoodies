@@ -30,8 +30,14 @@ private bool $isValidated = false;
     /**
      * @var Collection<int, OrderItem>
      */
-    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'order')]
-    private Collection $orderItems;
+    #[ORM\OneToMany(
+    targetEntity: OrderItem::class,
+    mappedBy: 'order',
+    cascade: ['persist', 'remove'],
+    orphanRemoval: true
+)]
+private Collection $orderItems;
+
 
     #[ORM\Column]
     private ?float $total_price = null;

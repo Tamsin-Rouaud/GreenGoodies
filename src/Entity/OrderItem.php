@@ -20,8 +20,9 @@ class OrderItem
     private ?float $unit_price = null;
 
     #[ORM\ManyToOne(inversedBy: 'orderItems')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Order $order = null;
+#[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+private ?Order $order = null;
+
 
     #[ORM\ManyToOne(inversedBy: 'orderItems')]
     #[ORM\JoinColumn(nullable: false)]
